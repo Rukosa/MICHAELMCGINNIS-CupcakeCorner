@@ -25,7 +25,7 @@ struct CheckoutView: View {
         do{
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
-            confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+            confirmationMessage = "Your order for \(decodedOrder.orderItem.quantity)x \(OrderStruct.types[decodedOrder.orderItem.type].lowercased()) cupcakes is on its way!"
             showingConfirmation = true
         } catch{
             print("Checkout failed.")
@@ -46,7 +46,7 @@ struct CheckoutView: View {
                 }
                 .frame(height: 233)
                 
-                Text("Your total is \(order.cost, format: .currency(code: "USD"))")
+                Text("Your total is \(order.orderItem.cost, format: .currency(code: "USD"))")
                     .font(.title)
                 
                 Button("Place Order"){
