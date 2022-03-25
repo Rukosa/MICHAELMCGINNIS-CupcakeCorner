@@ -38,10 +38,10 @@ struct OrderStruct: Codable, Hashable{
     var zip = ""
     
     var hasValidAddress: Bool{
-        if name.isEmpty || streetAddress.isEmpty{
+        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty{
             return false
         }
-        if name.hasPrefix(" ") || name.hasSuffix(" ") || streetAddress.hasPrefix(" ") || streetAddress.hasSuffix(" ") {
+        if name.hasPrefix(" ") || name.hasSuffix(" ") || streetAddress.hasPrefix(" ") || streetAddress.hasSuffix(" ") || city.hasPrefix(" ") || city.hasSuffix(" ") || zip.hasPrefix(" ") || zip.hasSuffix(" ") {
             return false
         }
         return true

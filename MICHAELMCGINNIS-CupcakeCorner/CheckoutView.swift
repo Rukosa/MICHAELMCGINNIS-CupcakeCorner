@@ -20,8 +20,9 @@ struct CheckoutView: View {
         }
         let url = URL(string: "https://reqres.in/api/cupcakes")!
         var request = URLRequest(url: url)
-        request.setValue("applications/json", forHTTPHeaderField: "POST")
-        
+        request.setValue("applications/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = encoded
         do{
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
